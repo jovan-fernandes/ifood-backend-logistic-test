@@ -1,0 +1,31 @@
+server:
+  port: ${port:8081}
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: mongo
+      repositories:
+        type: auto
+        enabled: true
+
+  jackson:
+    time-zone: Brazil/East
+    locale: pt_BR
+
+mongo:
+  min-connections: 2
+  max-connections: 5
+  connect-timeout-ms: 5000
+  socket-timeout-ms: 5000
+
+logging:
+  pattern:
+    console: "appGroup=iFoodVRP %d{dd-MM-yyyy HH:mm:ss} - %C[%M]:%L %msg%n"
+    file: "%d{dd-MM-e
+    yyyy HH:mm:ss} [%thread] %-5level %logger{36} - %C[%M]:%L %msg%n"
+  level:
+    sql: DEBUG
+#    ROOT: DEBUG

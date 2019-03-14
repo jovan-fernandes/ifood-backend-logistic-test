@@ -1,0 +1,106 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.2.RELEASE'
+		springfoxVersion = '2.9.2'
+		springCloudVersion = 'Greenwich.RELEASE'
+		springCloudFeignVersion = '1.4.6.RELEASE'
+
+		springDataRedisVersion = "2.1.4.RELEASE"
+
+
+		lombokVersion = '1.18.6'
+
+		mysqlVersion = '5.1.35'
+
+		mapStructVersion = '1.3.0.Final'
+
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+
+plugins {
+	id 'net.ltgt.apt' version '0.8'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'application'
+
+
+mainClassName= "com.jovan.logistics.iFoodVRP.IFoodVrpApplication"
+
+group = 'com.jovan.logistics'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+
+compileJava {
+	options.compilerArgs = [
+			'-parameters',
+			'-Amapstruct.defaultComponentModel=spring'
+	]
+	options.encoding = 'UTF-8'
+}
+//compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://repo.spring.io/milestone' }
+}
+
+
+dependencies {
+
+	compile("org.mapstruct:mapstruct-jdk8:${mapStructVersion}")
+	annotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
+	testAnnotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
+
+	/** Swagger **/
+	compile "io.springfox:springfox-swagger-ui:${springfoxVersion}"
+	compile "io.springfox:springfox-swagger2:${springfoxVersion}"
+
+
+	/** Lombok **/
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+
+	/** Spring **/
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+	/** Feign - HTTP Client por Anotação e Retentativas com Hystrix **/
+	compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+	compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard')
+
+
+//	compile("org.mapstruct:mapstruct-jdk8:${mapStructVersion}")
+//	annotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
+
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
