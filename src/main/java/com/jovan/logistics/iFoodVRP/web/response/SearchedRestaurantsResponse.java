@@ -15,9 +15,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchedClientsResponse {
+public class SearchedRestaurantsResponse {
 
     private long totalOfElements;
     private int totalOfPages;
-    private List<ClientResponse> clients;
+    private List<RestaurantResponse> restaurants;
+
 }

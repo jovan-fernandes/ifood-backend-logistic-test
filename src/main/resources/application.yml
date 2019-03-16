@@ -24,8 +24,7 @@ mongo:
 logging:
   pattern:
     console: "appGroup=iFoodVRP %d{dd-MM-yyyy HH:mm:ss} - %C[%M]:%L %msg%n"
-    file: "%d{dd-MM-e
-    yyyy HH:mm:ss} [%thread] %-5level %logger{36} - %C[%M]:%L %msg%n"
+    file: "%d{dd-MM-yyyy HH:mm:ss} [%thread] %-5level %logger{36} - %C[%M]:%L %msg%n"
   level:
     sql: DEBUG
 #    ROOT: DEBUG

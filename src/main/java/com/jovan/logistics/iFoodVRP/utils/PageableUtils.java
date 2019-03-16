@@ -11,7 +11,7 @@ import org.springframework.data.domain.Sort;
  */
 public class PageableUtils {
 
-    public static PageRequest createPageableForClients(Integer pageNumber, Integer numberOfElements) {
-        return PageRequest.of(pageNumber - 1 < 0 ? pageNumber : pageNumber - 1, numberOfElements, Sort.Direction.ASC, ("name"));
+    public static PageRequest createPageable(Integer pageNumber, Integer numberOfElements, String orderPropertyName) {
+        return PageRequest.of(pageNumber - 1 < 0 ? pageNumber : pageNumber - 1, numberOfElements, Sort.Direction.ASC, (orderPropertyName));
     }
 }

@@ -10,14 +10,15 @@ import java.util.List;
  * @author Jovan Fernandes
  * @version $Revision: $<br/>
  * $Id: $
- * @since 2019-03-13 19:45
+ * @since 2019-03-16 00:50
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchedClientsResponse {
+public class SearchedOrdersResponse {
+
 
     private long totalOfElements;
     private int totalOfPages;
-    private List<ClientResponse> clients;
+    private List<OrderResponse> orders;
 }

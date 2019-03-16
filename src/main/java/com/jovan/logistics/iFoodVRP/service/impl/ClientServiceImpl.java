@@ -7,15 +7,11 @@ import com.jovan.logistics.iFoodVRP.mapper.ClientMapper;
 import com.jovan.logistics.iFoodVRP.repository.ClientRepository;
 import com.jovan.logistics.iFoodVRP.service.ClientService;
 import com.jovan.logistics.iFoodVRP.utils.PageableUtils;
-import com.jovan.logistics.iFoodVRP.web.response.ClientResponse;
 import com.jovan.logistics.iFoodVRP.web.response.SearchedClientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Jovan Fernandes
@@ -40,11 +36,11 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public SearchedClientsResponse getAll(final Integer pageNumber,final Integer numberOfElements) {
-        PageRequest pageableForClients = PageableUtils.createPageableForClients(pageNumber, numberOfElements);
+    public SearchedClientsResponse getAll(final Integer pageNumber, final Integer numberOfElements) {
+        PageRequest pageableForClients = PageableUtils.createPageable(pageNumber, numberOfElements, "name");
         Page<ClientEntity> clientEntities = clientRepository.findAll(pageableForClients);
 
-        return convertToSearchedClientsResponse(clientEntities);
+        return this.mapper.toSearchedClientsResponse(clientEntities);
     }
 
     @Override
@@ -57,16 +53,6 @@ public class ClientServiceImpl implements ClientService {
         ClientEntity entity = clientRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         this.mapper.merge(client, entity);
         return this.mapper.toDTO(clientRepository.save(entity));
-    }
-
-
-    private SearchedClientsResponse convertToSearchedClientsResponse(Page<ClientEntity> pageable){
-        return new SearchedClientsResponse(pageable.getTotalElements(), pageable.getTotalPages(),
-                convertToClientResponse(pageable.getContent()));
-    }
-
-    private List<ClientResponse> convertToClientResponse(List<ClientEntity> clients){
-        return clients.stream().map(c -> this.mapper.toResponse(c)).collect(Collectors.toList());
     }
 
 }

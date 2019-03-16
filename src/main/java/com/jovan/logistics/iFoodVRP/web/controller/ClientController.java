@@ -10,7 +10,6 @@ import com.jovan.logistics.iFoodVRP.web.response.ClientResponse;
 import com.jovan.logistics.iFoodVRP.web.response.SearchedClientsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +18,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -30,7 +30,7 @@ import javax.validation.constraints.NotNull;
  * $Id: $
  * @since 2019-03-12 00:23
  */
-@Controller
+@RestController
 @RequestMapping(path = "/clients")
 @ApiVersion("v1")
 @Validated
@@ -44,15 +44,16 @@ public class ClientController {
     private ClientMapper mapper;
 
     @PostMapping
-    public ResponseEntity<ClientResponse> create(@Valid @RequestBody final ClientRequest request){
+    public ResponseEntity<ClientResponse> create(@Valid @RequestBody final ClientRequest request) {
         ClientDTO created = clientService.create(this.mapper.toDTO(request));
         return ResponseEntity.ok(this.mapper.toResponse(created));
     }
 
 
     @GetMapping
-    public ResponseEntity<SearchedClientsResponse> getAll() {
-        SearchedClientsResponse all = clientService.getAll(1, 10);
+    public ResponseEntity<SearchedClientsResponse> getAll(@RequestParam("pageNumber") @NotNull @Min(1) final Integer pageNumber,
+                                                          @RequestParam("numberOfElements") @NotNull @Min(1) final Integer numberOfElements) {
+        SearchedClientsResponse all = clientService.getAll(pageNumber, numberOfElements);
         return ResponseEntity.ok(all);
     }
 
@@ -64,7 +65,7 @@ public class ClientController {
 
     @PutMapping(path = "/{clientId}")
     public ResponseEntity<ClientResponse> update(@PathVariable("clientId") String id, @Valid @RequestBody ClientRequest request) throws EntityNotFoundException {
-        ClientDTO updated = clientService.update(id , this.mapper.toDTO(request));
+        ClientDTO updated = clientService.update(id, this.mapper.toDTO(request));
         return ResponseEntity.ok(this.mapper.toResponse(updated));
     }
 

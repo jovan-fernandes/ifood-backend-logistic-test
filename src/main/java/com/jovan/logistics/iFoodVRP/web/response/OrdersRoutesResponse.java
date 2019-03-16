@@ -1,23 +1,24 @@
 package com.jovan.logistics.iFoodVRP.web.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Jovan Fernandes
  * @version $Revision: $<br/>
  * $Id: $
- * @since 2019-03-13 19:45
+ * @since 2019-03-16 02:01
  */
 @Data
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
-public class SearchedClientsResponse {
+@NoArgsConstructor
+public class OrdersRoutesResponse implements Serializable {
 
-    private long totalOfElements;
-    private int totalOfPages;
-    private List<ClientResponse> clients;
+    private List<String> orders;
 }

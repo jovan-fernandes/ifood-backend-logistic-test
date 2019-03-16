@@ -1,7 +1,11 @@
 package com.jovan.logistics.iFoodVRP.service;
 
 import com.jovan.logistics.iFoodVRP.dto.OrderDTO;
-import org.springframework.data.domain.Page;
+import com.jovan.logistics.iFoodVRP.exception.EntityNotFoundException;
+import com.jovan.logistics.iFoodVRP.web.response.SearchedOrdersResponse;
+
+import java.util.Calendar;
+import java.util.Optional;
 
 /**
  * @author Jovan Fernandes
@@ -12,11 +16,13 @@ import org.springframework.data.domain.Page;
 public interface OrderService {
 
 
-    void create(final OrderDTO order);
+    OrderDTO create(final OrderDTO order) throws EntityNotFoundException;
 
-    Page<OrderDTO> getAll();
+    SearchedOrdersResponse getAll(Integer pageNumber, Integer numberOfElements, Optional<Calendar> deliveryTime);
 
-    OrderDTO getById(final Long id);
+    SearchedOrdersResponse getByRestaurant(Integer pageNumber, Integer numberOfElements, String restaurantName, Optional<Calendar> deliveryTime);
 
-    void update(final OrderDTO order);
+    OrderDTO getById(final String id) throws EntityNotFoundException;
+
+    OrderDTO update(final String id, final OrderDTO order) throws EntityNotFoundException;
 }
