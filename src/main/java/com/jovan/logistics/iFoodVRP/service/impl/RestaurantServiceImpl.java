@@ -2,6 +2,7 @@ package com.jovan.logistics.iFoodVRP.service.impl;
 
 import com.jovan.logistics.iFoodVRP.domain.RestaurantEntity;
 import com.jovan.logistics.iFoodVRP.dto.RestaurantDTO;
+import com.jovan.logistics.iFoodVRP.exception.EntityAlreadyExistsException;
 import com.jovan.logistics.iFoodVRP.exception.EntityNotFoundException;
 import com.jovan.logistics.iFoodVRP.mapper.RestaurantMapper;
 import com.jovan.logistics.iFoodVRP.repository.RestaurantRepository;
@@ -30,8 +31,13 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public RestaurantDTO create(RestaurantDTO restaurant) {
+        restaurantRepository.findByName(restaurant.getName()).ifPresent(s -> {
+            throw new EntityAlreadyExistsException();
+        });
+
+
         RestaurantEntity restaurantEntity = this.mapper.toEntity(restaurant);
-        return this.mapper.toDTO(restaurantRepository.save(restaurantEntity));
+        return this.mapper.toDTO(restaurantRepository.insert(restaurantEntity));
     }
 
     @Override

@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class RoutesServiceImpl implements RoutesService {
 
-    public static final int DRIVER_CAPACITY = 3;
     @Autowired
     private OrdersReposiory ordersReposiory;
 

@@ -8,17 +8,13 @@ import static org.mockito.Mockito.when;
 import com.jovan.logistics.iFoodVRP.domain.ClientEntity;
 import com.jovan.logistics.iFoodVRP.dto.ClientDTO;
 import com.jovan.logistics.iFoodVRP.exception.EntityAlreadyExistsException;
-import com.jovan.logistics.iFoodVRP.mapper.ClientMapper;
-import com.jovan.logistics.iFoodVRP.repository.ClientRepository;
+import com.jovan.logistics.iFoodVRP.exception.EntityNotFoundException;
 import com.jovan.logistics.iFoodVRP.service.impl.ClientServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Spy;
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Optional;
@@ -30,20 +26,7 @@ import java.util.Optional;
  * @since 2019-03-17 02:55
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class ClientServiceImplTest {
-
-    public static final String CLIENT_ID = "54asjdbnbeiug892374";
-    public static final String TEST_USER_NAME = "TEST USER";
-    public static final Double LAT = -23.588055;
-    public static final Double LON = -46.632403;
-
-
-    @Mock
-    private ClientRepository clientRepository;
-
-
-    @Spy
-    private ClientMapper mapper = Mappers.getMapper(ClientMapper.class);
+public class ClientServiceImplTest extends AbstractIFoodVRPTest {
 
     @InjectMocks
     private ClientServiceImpl clientService;
@@ -53,8 +36,8 @@ public class ClientServiceImplTest {
     public void createClientWithSucces() {
 
         ClientDTO newClient = ClientDTO.builder()
-                .lat(LAT)
-                .lon(LON)
+                .lat(CLIENT_LAT)
+                .lon(CLIENT_LON)
                 .name(TEST_USER_NAME)
                 .build();
 
@@ -72,8 +55,8 @@ public class ClientServiceImplTest {
     @Test(expected = EntityAlreadyExistsException.class)
     public void createClientWithSameName() {
         ClientDTO newClient = ClientDTO.builder()
-                .lat(LAT)
-                .lon(LON)
+                .lat(CLIENT_LAT)
+                .lon(CLIENT_LON)
                 .name(TEST_USER_NAME)
                 .build();
 
@@ -86,18 +69,47 @@ public class ClientServiceImplTest {
     }
 
 
-    private ClientDTO buildDefaultClientDTO() {
-        return ClientDTO.builder()
-                .clientId(CLIENT_ID)
-                .lat(LAT)
-                .lon(LON)
-                .name(TEST_USER_NAME)
-                .build();
+    @Test
+    public void getClientByIdWithSuccess() throws EntityNotFoundException {
+        when(clientRepository.findById(CLIENT_ID)).thenReturn(Optional.of(buildDefaultClientEntity()));
+
+        ClientDTO clientDTO = clientService.getById(CLIENT_ID);
+
+        Assertions.assertThat(clientDTO).isNotNull();
     }
 
-    private ClientEntity buildDefaultClientEntity() {
-        return new ClientEntity(CLIENT_ID, TEST_USER_NAME,
-                new GeoJsonPoint(LAT, LON));
+    @Test(expected = EntityNotFoundException.class)
+    public void getClientWithUnknownId() throws EntityNotFoundException {
+        when(clientRepository.findById(anyString())).thenReturn(Optional.empty());
+
+        clientService.getById("XXXXXX");
+    }
+
+    @Test
+    public void updateClientWithSuccess() throws EntityNotFoundException {
+        ClientEntity clientEntity = buildDefaultClientEntity();
+
+        when(clientRepository.findById(CLIENT_ID)).thenReturn(Optional.of(clientEntity));
+
+        String newName = "joao";
+
+        clientEntity.setName(newName);
+
+        when(clientRepository.save(any(ClientEntity.class))).thenReturn(clientEntity);
+
+        ClientDTO updateDTO = ClientDTO.builder().name(newName).lon(00d).lat(10d).build();
+
+        ClientDTO updatedDTO = clientService.update(CLIENT_ID, updateDTO);
+
+        assertTrue(CLIENT_ID.equals(updatedDTO.getClientId()) && newName.equals(updatedDTO.getName()));
+    }
+
+    @Test(expected = EntityNotFoundException.class)
+    public void updateClientWithUnknownId() throws EntityNotFoundException {
+        when(clientRepository.findById(anyString())).thenReturn(Optional.empty());
+
+        clientService.update("XXXX", new ClientDTO());
 
     }
+
 }

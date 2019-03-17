@@ -1,6 +1,7 @@
 package com.jovan.logistics.iFoodVRP.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.Calendar;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
 @ToString
 public class OrderDTO implements Serializable {
 

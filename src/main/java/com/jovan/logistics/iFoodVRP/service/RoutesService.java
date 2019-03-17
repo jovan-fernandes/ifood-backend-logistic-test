@@ -10,6 +10,9 @@ import com.jovan.logistics.iFoodVRP.dto.RoutesDTO;
  */
 public interface RoutesService {
 
+
+    public static final int DRIVER_CAPACITY = 3;
+
     /**
      * Rules
      * <p>
