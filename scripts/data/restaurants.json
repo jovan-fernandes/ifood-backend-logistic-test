@@ -1,0 +1,18 @@
+[
+{
+	name : "Padaria",
+	location : { type : "Point", "coordinates" : [-23.5882133, -46.63235580000003]}
+},
+{
+	name : "Lanchonete do Paulo",
+	location : { type : "Point", "coordinates" : [-23.5707855, -46.643499399999996]}
+},
+{
+	name : "MacDonalds",
+	location : { type : "Point", "coordinates" : [-23.5829461, -46.6315126]}
+},
+{
+	name : "BurgerKing",
+	location : { type : "Point", "coordinates" : [-23.5834181, -46.6418552]}
+}
+]

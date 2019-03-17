@@ -1,11 +1,9 @@
 package com.jovan.logistics.iFoodVRP.service;
 
 import com.jovan.logistics.iFoodVRP.dto.ClientDTO;
+import com.jovan.logistics.iFoodVRP.exception.EntityAlreadyExistsException;
 import com.jovan.logistics.iFoodVRP.exception.EntityNotFoundException;
 import com.jovan.logistics.iFoodVRP.web.response.SearchedClientsResponse;
-import org.springframework.data.domain.Page;
-
-import java.util.Collection;
 
 /**
  * @author Jovan Fernandes
@@ -16,9 +14,9 @@ import java.util.Collection;
 public interface ClientService {
 
 
-    ClientDTO create(final ClientDTO client);
+    ClientDTO create(final ClientDTO client) throws EntityAlreadyExistsException;
 
-    SearchedClientsResponse getAll(final Integer pageNumber,final Integer numberOfElements);
+    SearchedClientsResponse getAll(final Integer pageNumber, final Integer numberOfElements);
 
     ClientDTO getById(final String id) throws EntityNotFoundException;
 

@@ -1,0 +1,62 @@
+[
+{
+	name : "Lúcia",
+	location : { type : "Point", "coordinates" : [-23.5702415, -46.635375]}
+},
+{
+	name : "Stella",
+	location : { type : "Point", "coordinates" : [-23.5623743, -46.6478634]}
+},
+{
+	name : "Daniela",
+	location : { type : "Point", "coordinates" : [-23.5690615, -46.6592789]}
+},
+{
+	name : "Eduardo",
+	location : { type : "Point", "coordinates" : [-23.5552147, -46.6574764]}
+},
+{
+	name : "Felipe",
+	location : { type : "Point", "coordinates" : [-23.5606041, -46.6663599]}
+},
+{
+	name : "Marco",
+	location : { type : "Point", "coordinates" : [-23.5625317, -46.6686773]}
+},
+{
+	name : "Mariana",
+	location : { type : "Point", "coordinates" : [-23.5617056, -46.662454600000004]}
+},
+{
+	name : "Juliana",
+	location : { type : "Point", "coordinates" : [-23.5578111, -46.6656303]}
+},
+{
+	name : "Adriana",
+	location : { type : "Point", "coordinates" : [-23.5653639, -46.661725]}
+},
+{
+	name : "Roberto",
+	location : { type : "Point", "coordinates" : [-23.5549787, -46.6588497]}
+},
+{
+	name : "Marcelo",
+	location : { type : "Point", "coordinates" : [-23.5640265, -46.6527128]}
+},
+{
+	name : "Sofia",
+	location : { type : "Point", "coordinates" : [-23.5673307, -46.6529703]}
+},
+{
+	name : "Sheila",
+	location : { type : "Point", "coordinates" : [-23.5672914, -46.6462326]}
+},
+{
+	name : "William",
+	location : { type : "Point", "coordinates" : [-23.5803502, -46.6352892]}
+},
+{
+	name : "Manoela",
+	location : { type : "Point", "coordinates" : [-23.5831428, -46.6334867]}
+}
+]

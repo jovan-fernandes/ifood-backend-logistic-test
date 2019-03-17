@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class OrderDTO implements Serializable {
 
 

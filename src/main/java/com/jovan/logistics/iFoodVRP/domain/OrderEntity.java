@@ -14,11 +14,14 @@ import java.util.Calendar;
  * $Id: $
  * @since 2019-03-12 22:42
  */
-@Document(collection = "orders")
+@Document(collection = OrderEntity.ORDERS_COLLECTION_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderEntity {
+
+    public static final String ORDERS_COLLECTION_NAME = "orders";
+
 
     @Id
     private String id;

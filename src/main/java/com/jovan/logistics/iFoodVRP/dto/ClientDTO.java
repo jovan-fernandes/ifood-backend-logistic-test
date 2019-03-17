@@ -1,9 +1,11 @@
 package com.jovan.logistics.iFoodVRP.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -17,6 +19,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Builder
+@ToString(exclude = {"clientId", "lat", "lon"})
 public class ClientDTO implements Serializable {
 
     private String clientId;

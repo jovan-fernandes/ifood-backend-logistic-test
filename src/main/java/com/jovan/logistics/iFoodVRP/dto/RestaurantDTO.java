@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString(exclude = {"id", "lat", "lon"})
 public class RestaurantDTO implements Serializable {
 
 

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * $Id: $
  * @since 2019-03-14 00:59
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public abstract class RestaurantMapper {
 
     @Mapping(target = "id", ignore = true)

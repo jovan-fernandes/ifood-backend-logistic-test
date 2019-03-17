@@ -26,3 +26,4 @@ public class ClientEntity {
     private GeoJsonPoint location;
 
 }
+

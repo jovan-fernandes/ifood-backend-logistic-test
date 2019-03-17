@@ -2,12 +2,14 @@ package com.jovan.logistics.iFoodVRP.service.impl;
 
 import com.jovan.logistics.iFoodVRP.domain.ClientEntity;
 import com.jovan.logistics.iFoodVRP.dto.ClientDTO;
+import com.jovan.logistics.iFoodVRP.exception.EntityAlreadyExistsException;
 import com.jovan.logistics.iFoodVRP.exception.EntityNotFoundException;
 import com.jovan.logistics.iFoodVRP.mapper.ClientMapper;
 import com.jovan.logistics.iFoodVRP.repository.ClientRepository;
 import com.jovan.logistics.iFoodVRP.service.ClientService;
 import com.jovan.logistics.iFoodVRP.utils.PageableUtils;
 import com.jovan.logistics.iFoodVRP.web.response.SearchedClientsResponse;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,10 +29,17 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Autowired
+    @Setter
     private ClientMapper mapper;
 
+
     @Override
-    public ClientDTO create(final ClientDTO client) {
+    public ClientDTO create(final ClientDTO client) throws EntityAlreadyExistsException {
+
+        clientRepository.findByName(client.getName()).ifPresent(s -> {
+            throw new EntityAlreadyExistsException();
+        });
+
         ClientEntity created = clientRepository.insert(this.mapper.toEntity(client));
         return this.mapper.toDTO(created);
     }

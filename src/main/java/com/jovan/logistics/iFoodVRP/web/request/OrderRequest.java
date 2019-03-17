@@ -1,6 +1,8 @@
 package com.jovan.logistics.iFoodVRP.web.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.jovan.logistics.iFoodVRP.utils.DateFormatter;
+import com.jovan.logistics.iFoodVRP.web.validators.PickupTimeDeliveryTime;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +27,7 @@ import java.util.Calendar;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode
+@PickupTimeDeliveryTime
 public class OrderRequest implements Serializable {
 
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
@@ -38,14 +41,14 @@ public class OrderRequest implements Serializable {
     private String clientId;
 
     @NotNull
-    @DateTimeFormat(pattern = DATE_TIME_FORMAT)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME_FORMAT, timezone = "America/Sao_Paulo")
+    @DateTimeFormat(pattern = DateFormatter.APPLICATION_DATE_TIME_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @ApiModelProperty(required = true, example = "2018-06-05T13:37:00Z")
     private Calendar pickup;
 
     @NotNull
-    @DateTimeFormat(pattern = DATE_TIME_FORMAT)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DATE_TIME_FORMAT, timezone = "America/Sao_Paulo")
+    @DateTimeFormat(pattern = DateFormatter.APPLICATION_DATE_TIME_FORMAT)
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @ApiModelProperty(required = true, example = "2018-06-05T13:54:00Z")
     private Calendar delivery;
 }

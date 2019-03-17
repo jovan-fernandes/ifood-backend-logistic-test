@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -29,8 +31,12 @@ public class RestaurantRequest implements Serializable {
     private String name;
 
     @NotNull(message = "O campo 'latitude' não pode ser vazio")
+    @Min(-90)
+    @Max(90)
     private Double lat;
 
     @NotNull(message = "O campo 'longitude' não pode ser vazio")
+    @Min(-180)
+    @Max(180)
     private Double lon;
 }

@@ -4,6 +4,7 @@ import com.jovan.logistics.iFoodVRP.domain.OrderEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Calendar;
 import java.util.List;
@@ -14,11 +15,13 @@ import java.util.List;
  * $Id: $
  * @since 2019-03-15 23:26
  */
+@Repository
 public interface OrdersReposiory extends MongoRepository<OrderEntity, String> {
 
-    Page<OrderEntity> findByRestaurant_name(String name, Pageable pageable);
+    Page<OrderEntity> findByRestaurant_name(final String name, final Pageable pageable);
 
-    Page<OrderEntity> findByRestaurant_nameAndDelivery(String name, Calendar delivery, Pageable pageable);
+    Page<OrderEntity> findByRestaurant_nameAndDelivery(final String name, final Calendar delivery, final Pageable pageable);
 
-    List<OrderEntity> findByRestaurant_id(String id);
+    List<OrderEntity> findByRestaurant_id(final String id);
+
 }

@@ -1,5 +1,6 @@
 package com.jovan.logistics.iFoodVRP.mapper;
 
+import com.jovan.logistics.iFoodVRP.dto.OrderDTO;
 import com.jovan.logistics.iFoodVRP.dto.RoutesDTO;
 import com.jovan.logistics.iFoodVRP.web.response.OrdersRoutesResponse;
 import com.jovan.logistics.iFoodVRP.web.response.RoutesResponse;
@@ -14,16 +15,28 @@ import java.util.stream.Collectors;
  * $Id: $
  * @since 2019-03-16 02:07
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public interface RoutesMapper {
 
     default RoutesResponse toResponse(RoutesDTO dto) {
 
         List<OrdersRoutesResponse> routes = dto.getOrders().stream()
-                .map(drivers -> drivers.stream().map(orderDTO -> orderDTO.getId()).collect(Collectors.toList()))
+                .map(drivers -> drivers.stream().map(orderDTO -> buildRouteOutput(orderDTO)).collect(Collectors.toList()))
                 .map(OrdersRoutesResponse::new).collect(Collectors.toList());
 
         return RoutesResponse.builder().routes(routes).build();
+    }
+
+    default String buildRouteOutput(OrderDTO orderDTO) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Pedido do(a) ")
+                .append(orderDTO.getClient().getName())
+                .append(" - Restaurante: ")
+                .append(orderDTO.getRestaurant().getName())
+                .append(" - id: ")
+                .append(orderDTO.getId());
+
+        return sb.toString();
     }
 
     ;

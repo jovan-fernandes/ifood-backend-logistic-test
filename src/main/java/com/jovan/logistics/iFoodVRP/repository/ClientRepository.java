@@ -4,6 +4,8 @@ import com.jovan.logistics.iFoodVRP.domain.ClientEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * @author Jovan Fernandes
  * @version $Revision: $<br/>
@@ -12,4 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ClientRepository extends MongoRepository<ClientEntity, String> {
+
+    Optional<ClientEntity> findByName(String name);
 }
