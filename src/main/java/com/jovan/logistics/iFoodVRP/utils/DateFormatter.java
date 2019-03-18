@@ -3,6 +3,8 @@ package com.jovan.logistics.iFoodVRP.utils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
@@ -28,6 +30,17 @@ public class DateFormatter {
     private final static SimpleDateFormat defaultFormatter = new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT);
 
     private final static SimpleDateFormat isoFormatter = new SimpleDateFormat(APPLICATION_DATE_TIME_FORMAT);
+
+
+    public static Date getNowDefaultTimeZone() {
+//        SimpleDateFormat format = new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT);
+//        format.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+//        Date now = new Date();
+
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("America/Sao_Paulo"));
+        return Date.from(now.minusHours(3l).toInstant());
+//        return Calendar.getInstance(TimeZone.getTimeZone("America/Sao_Paulo")).getTime();
+    }
 
 
     public static Optional<String> formatDate(Calendar calendar) {

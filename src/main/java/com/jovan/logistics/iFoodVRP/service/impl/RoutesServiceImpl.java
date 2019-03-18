@@ -9,11 +9,13 @@ import com.jovan.logistics.iFoodVRP.repository.CustomOrdersQueryRepository;
 import com.jovan.logistics.iFoodVRP.repository.OrdersReposiory;
 import com.jovan.logistics.iFoodVRP.repository.RestaurantRepository;
 import com.jovan.logistics.iFoodVRP.service.RoutesService;
+import com.jovan.logistics.iFoodVRP.utils.DateFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +45,7 @@ public class RoutesServiceImpl implements RoutesService {
     public RoutesDTO getRoutes() {
         List<RestaurantEntity> restaurants = restaurantRepository.findAll();
 
+        //Recupera os pedidos ordenados pelos mais próximos ao restaurante
         List<List<OrderEntity>> ordersPerRestaurants = restaurants.stream()
                 .map(r -> customOrdersQueryRepository.findByRestautantOrdersSortedByNearest(r))
                 .filter(r -> !r.isEmpty())
@@ -53,16 +56,39 @@ public class RoutesServiceImpl implements RoutesService {
 
         for (List<OrderEntity> restaurantOrders : ordersPerRestaurants) {
 
-            ordersPerDrivers.add(new ArrayList<>());
+            List<List<OrderDTO>> ordersPerDriversByRestaurant = new ArrayList<>();
+            ordersPerDriversByRestaurant.add(new ArrayList<>());
 
             for (OrderEntity order : restaurantOrders) {
-                if (ordersPerDrivers.get(ordersPerDrivers.size() - 1).size() < DRIVER_CAPACITY) {
-                    ordersPerDrivers.get(ordersPerDrivers.size() - 1).add(mapper.toDTO(order));
+
+                //CAN'T pick up an order before the pickup time
+                if (DateFormatter.getNowDefaultTimeZone().before(order.getPickup())) {
+                    continue;
+                }
+
+                //Handle driver capicity
+                if (ordersPerDriversByRestaurant.get(ordersPerDriversByRestaurant.size() - 1).size() < DRIVER_CAPACITY) {
+                    ordersPerDriversByRestaurant.get(ordersPerDriversByRestaurant.size() - 1).add(mapper.toDTO(order));
                 } else {
-                    ordersPerDrivers.add(new ArrayList<>());
-                    ordersPerDrivers.get(ordersPerDrivers.size() - 1).add(mapper.toDTO(order));
+                    ordersPerDriversByRestaurant.add(new ArrayList<>());
+                    ordersPerDriversByRestaurant.get(ordersPerDriversByRestaurant.size() - 1).add(mapper.toDTO(order));
                 }
             }
+
+            //O pedido mais atrasado terá prioridade para o entregador
+            for (List<OrderDTO> orderDTOS : ordersPerDriversByRestaurant) {
+                orderDTOS.sort(new Comparator<OrderDTO>() {
+                    @Override
+                    public int compare(OrderDTO o1, OrderDTO o2) {
+                        return o1.getDelivery().compareTo(o2.getDelivery());
+                    }
+                });
+            }
+
+            
+            ordersPerDrivers.addAll(ordersPerDriversByRestaurant.stream()
+                    .filter(r -> !r.isEmpty())
+                    .collect(Collectors.toList()));
 
         }
 

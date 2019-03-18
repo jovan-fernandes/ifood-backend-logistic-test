@@ -44,8 +44,8 @@ public class OrdersServiceImpl implements OrderService {
     @Override
     public OrderDTO create(OrderDTO order) throws EntityNotFoundException {
 
-        RestaurantEntity restaurantEntity = restaurantRepository.findById(order.getRestaurant().getId()).orElseThrow(EntityNotFoundException::new);
-        ClientEntity clientEntity = clientReposiory.findById(order.getClient().getClientId()).orElseThrow(EntityNotFoundException::new);
+        RestaurantEntity restaurantEntity = getRestaurantEntity(order);
+        ClientEntity clientEntity = getClientEntity(order);
 
         OrderEntity entity = this.mapper.toEntity(order);
 
@@ -62,6 +62,21 @@ public class OrdersServiceImpl implements OrderService {
 
 
         return orderDTO;
+    }
+
+    private ClientEntity getClientEntity(OrderDTO order) throws EntityNotFoundException {
+        Optional<ClientEntity> byId = clientReposiory.findById(order.getClient().getClientId());
+        return byId.isPresent() ? byId.get() :
+                clientReposiory.findByName(order.getClient().getClientId())
+                        .orElseThrow(EntityNotFoundException::new);
+
+    }
+
+    private RestaurantEntity getRestaurantEntity(OrderDTO order) throws EntityNotFoundException {
+        Optional<RestaurantEntity> byId = restaurantRepository.findById(order.getRestaurant().getId());
+        return byId.isPresent() ? byId.get() :
+                restaurantRepository.findByName(order.getRestaurant().getId())
+                        .orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -101,7 +116,14 @@ public class OrdersServiceImpl implements OrderService {
     @Override
     public OrderDTO update(String id, OrderDTO order) throws EntityNotFoundException {
         OrderEntity entity = ordersReposiory.findById(id).orElseThrow(EntityNotFoundException::new);
-        this.mapper.merge(order, entity);
+
+        entity.setRestaurant(getRestaurantEntity(order));
+        entity.setClient(getClientEntity(order));
+
+        entity.setDelivery(order.getDelivery());
+        entity.setPickup(order.getPickup());
+
+//        this.mapper.merge(order, entity);
         return this.mapper.toDTO(ordersReposiory.save(entity));
     }
 }

@@ -126,6 +126,10 @@ public class OrderServiceImplTest extends AbstractIFoodVRPTest {
     public void updateOrderWithSuccess() throws EntityNotFoundException, InvalidDateFormatException {
         OrderEntity orderEntity = buildDefaultOrderEntity();
 
+        when(clientRepository.findById(CLIENT_ID)).thenReturn(Optional.of(buildDefaultClientEntity()));
+
+        when(restaurantRepository.findById(RESTAURANT_ID)).thenReturn(Optional.of(buildDefaultRestaurantEntity()));
+
         when(ordersReposiory.findById(ORDER_ID)).thenReturn(Optional.of(orderEntity));
 
         Date newDeliveryTime = DateFormatter.formatDateToStrDefaultPattern("2018-06-05 14:00:30")

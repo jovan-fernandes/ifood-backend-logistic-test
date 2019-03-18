@@ -63,7 +63,8 @@ repositories {
 dependencies {
 
     // Mapstruct
-    compile("org.mapstruct:mapstruct:${mapStructVersion}")
+//    compile("org.mapstruct:mapstruct:${mapStructVersion}")
+    compile("org.mapstruct:mapstruct-jdk8:${mapStructVersion}")
     annotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
     testCompileOnly("org.mapstruct:mapstruct-jdk8:${mapStructVersion}")
 

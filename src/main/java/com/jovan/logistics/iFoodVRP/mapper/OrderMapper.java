@@ -35,6 +35,9 @@ public interface OrderMapper {
 
     OrderEntity toEntity(OrderDTO dto);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "restaurant", ignore = true)
+    @Mapping(target = "client", ignore = true)
     void merge(final OrderDTO source, @MappingTarget OrderEntity target);
 
     OrderResponse toResponse(OrderDTO dto);
