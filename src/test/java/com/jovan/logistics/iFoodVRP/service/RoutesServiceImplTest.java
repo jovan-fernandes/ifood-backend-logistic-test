@@ -8,6 +8,7 @@ import com.jovan.logistics.iFoodVRP.domain.RestaurantEntity;
 import com.jovan.logistics.iFoodVRP.dto.OrderDTO;
 import com.jovan.logistics.iFoodVRP.dto.RoutesDTO;
 import com.jovan.logistics.iFoodVRP.service.impl.RoutesServiceImpl;
+import com.jovan.logistics.iFoodVRP.vrp.VRPProblem;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +52,7 @@ public class RoutesServiceImplTest extends AbstractIFoodVRPTest {
 
         RoutesDTO routes = routesService.getRoutes();
 
-        List<List<OrderDTO>> result = routes.getOrders().stream().filter(orderDTOS -> orderDTOS.size() > RoutesService.DRIVER_CAPACITY)
+        List<List<OrderDTO>> result = routes.getOrders().stream().filter(orderDTOS -> orderDTOS.size() > VRPProblem.DRIVER_CAPACITY)
                 .collect(Collectors.toList());
 
         assertTrue(result.isEmpty());

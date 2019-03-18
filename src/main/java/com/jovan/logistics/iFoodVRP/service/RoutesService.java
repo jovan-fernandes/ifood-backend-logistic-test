@@ -1,6 +1,7 @@
 package com.jovan.logistics.iFoodVRP.service;
 
 import com.jovan.logistics.iFoodVRP.dto.RoutesDTO;
+import com.jovan.logistics.iFoodVRP.vrp.VRPProblem;
 
 /**
  * @author Jovan Fernandes
@@ -10,8 +11,6 @@ import com.jovan.logistics.iFoodVRP.dto.RoutesDTO;
  */
 public interface RoutesService {
 
-
-    public static final int DRIVER_CAPACITY = 3;
 
     /**
      * Rules
@@ -24,10 +23,15 @@ public interface RoutesService {
      * The driver is on the restaurant at the pickup time
      * Consider that the driver goes 0.1 units in line each 5 minute.
      * Each order must be optimized only once
-     * You should elaborate the algorithm to solve the Vehicle Routing Problem (do not use libraries for that)
      *
      * @return
      */
+    default RoutesDTO getRoutes(VRPProblem vrpProblem) {
+        return vrpProblem.calculate();
+    }
+
+    ;
+
     RoutesDTO getRoutes();
 
 }
