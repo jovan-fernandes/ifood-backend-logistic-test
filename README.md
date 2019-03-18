@@ -1,3 +1,15 @@
+# Instructions:
+
+- Before running, you will need Docker and Docker Compose installed (https://docs.docker.com/install/)  
+
+- How to run?
+    ``` docker-compose up ```
+
+- There is a Swagger for easily test the application: http://localhost:8081/swagger-ui.html    
+
+- Note: Everytime you rerun the application, the mongodb database is cleared and some data are putted.     
+     
+
 # iFood Backend Test - Logistic - Vehicle Routing Problem
 
 You have been hired to create a completely new micro-service to route orders minimizing overall distance. This problem is well known as Vehicle Routing Problem, please find a reference for it at (https://en.wikipedia.org/wiki/Vehicle_routing_problem). 

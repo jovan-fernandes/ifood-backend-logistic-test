@@ -12,6 +12,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class InvalidDateFormatException extends Exception {
 
-    private static final String MESSAGE = "Formato de data inválido, esperao: " + DateFormatter.APPLICATION_DATE_TIME_FORMAT;
+    private static final String MESSAGE = "Formato de data inválido, esperado: " + DateFormatter.APPLICATION_DATE_TIME_FORMAT;
 
 }
