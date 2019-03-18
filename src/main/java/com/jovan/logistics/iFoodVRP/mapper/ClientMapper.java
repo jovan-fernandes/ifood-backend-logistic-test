@@ -6,7 +6,6 @@ import com.jovan.logistics.iFoodVRP.web.request.ClientRequest;
 import com.jovan.logistics.iFoodVRP.web.response.ClientResponse;
 import com.jovan.logistics.iFoodVRP.web.response.SearchedClientsResponse;
 import org.mapstruct.AfterMapping;
-import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -23,7 +22,7 @@ import java.util.stream.Collectors;
  * $Id: $
  * @since 2019-03-12 00:45
  */
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper
 public abstract class ClientMapper {
 
     @Mapping(target = "clientId", ignore = true)

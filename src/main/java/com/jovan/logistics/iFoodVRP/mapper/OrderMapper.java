@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * $Id: $
  * @since 2019-03-14 01:00
  */
-@Mapper(componentModel = "spring", uses = {ClientMapper.class, RestaurantMapper.class})
+@Mapper(uses = {ClientMapper.class, RestaurantMapper.class})
 public interface OrderMapper {
 
     @Mappings({
@@ -49,5 +49,4 @@ public interface OrderMapper {
     default List<OrderResponse> toOrdersResponse(List<OrderEntity> orders) {
         return orders.stream().map(o -> this.toResponse(o)).collect(Collectors.toList());
     }
-
 }

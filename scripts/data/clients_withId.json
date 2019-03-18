@@ -1,0 +1,197 @@
+[
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b48d"
+    ),
+    name: "Lúcia",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5702415,
+        -46.635375
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b48c"
+    ),
+    name: "Stella",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5623743,
+        -46.6478634
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b48e"
+    ),
+    name: "Daniela",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5690615,
+        -46.6592789
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b480"
+    ),
+    name: "Eduardo",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5552147,
+        -46.6574764
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b481"
+    ),
+    name: "Felipe",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5606041,
+        -46.6663599
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b482"
+    ),
+    name: "Marco",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5625317,
+        -46.6686773
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b483"
+    ),
+    name: "Mariana",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5617056,
+        -46.662454600000004
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b484"
+    ),
+    name: "Juliana",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5578111,
+        -46.6656303
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b485"
+    ),
+    name: "Adriana",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5653639,
+        -46.661725
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b486"
+    ),
+    name: "Roberto",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5549787,
+        -46.6588497
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b487"
+    ),
+    name: "Marcelo",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5640265,
+        -46.6527128
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b488"
+    ),
+    name: "Sofia",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5673307,
+        -46.6529703
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b489"
+    ),
+    name: "Sheila",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5672914,
+        -46.6462326
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b48a"
+    ),
+    name: "William",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5803502,
+        -46.6352892
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b48b"
+    ),
+    name: "Manoela",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5831428,
+        -46.6334867
+      ]
+    }
+  }
+]

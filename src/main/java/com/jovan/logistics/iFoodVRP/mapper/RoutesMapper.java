@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * $Id: $
  * @since 2019-03-16 02:07
  */
-@Mapper(componentModel = "spring")
+@Mapper
 public interface RoutesMapper {
 
     default RoutesResponse toResponse(RoutesDTO dto) {

@@ -52,7 +52,16 @@ public class OrdersServiceImpl implements OrderService {
         entity.setRestaurant(restaurantEntity);
         entity.setClient(clientEntity);
 
-        return this.mapper.toDTO(ordersReposiory.insert(entity));
+        OrderDTO orderDTO = this.mapper.toDTO(ordersReposiory.insert(entity));
+
+        orderDTO.getClient().setLat(clientEntity.getLocation().getX());
+        orderDTO.getClient().setLon(clientEntity.getLocation().getY());
+
+        orderDTO.getRestaurant().setLat(restaurantEntity.getLocation().getX());
+        orderDTO.getRestaurant().setLon(restaurantEntity.getLocation().getY());
+
+
+        return orderDTO;
     }
 
     @Override

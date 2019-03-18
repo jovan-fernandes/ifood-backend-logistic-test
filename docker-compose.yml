@@ -1,0 +1,45 @@
+version: '3'
+services:
+  # iFoodVRP-App
+  iFoodVRP:
+    image: openjdk:8-jdk-alpine
+    command: /bin/sh ./app/scripts/docker-compose-start.sh
+    ports:
+      - "8081:8081"
+      - "8001:8001"
+    volumes:
+      - ./:/app
+    networks:
+      iFood_net:
+        ipv4_address: 172.16.238.6
+    depends_on:
+      - iFoodVRP-MongoDB
+    environment:
+      - JAVA_OPTS=-Xmx512m -XX:MaxMetaspaceSize=256m -XX:MaxDirectMemorySize=128m -Xss512k
+      - DB_IP=172.16.238.7
+
+  # Mongo DB
+  iFoodVRP-MongoDB:
+    image: mongo:latest
+    command: sh /scripts/start-mongodb-data.sh
+    restart: always
+    volumes:
+      - ./scripts/:/scripts/
+    ports:
+      - "27017:27017"
+    networks:
+      iFood_net:
+        ipv4_address: 172.16.238.7
+    healthcheck:
+      test: ["CMD", "mongo", "db.serverStatus()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+networks:
+  iFood_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
+        - subnet: 2001:3984:3989::/64

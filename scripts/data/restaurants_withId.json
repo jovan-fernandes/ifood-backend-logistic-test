@@ -1,0 +1,54 @@
+[
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b494"
+    ),
+    name: "Padaria do José",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5882133,
+        -46.63235580000003
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b493"
+    ),
+    name: "Lanchonete do Paulo",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5707855,
+        -46.643499399999996
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b496"
+    ),
+    name: "McDonalds",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5829461,
+        -46.6315126
+      ]
+    }
+  },
+  {
+    "_id": ObjectId(
+    "5c8eea396780791a27e7b495"
+    ),
+    name: "BurgerKing",
+    location: {
+      type: "Point",
+      "coordinates": [
+        -23.5834181,
+        -46.6418552
+      ]
+    }
+  }
+]

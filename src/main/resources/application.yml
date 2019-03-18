@@ -4,9 +4,9 @@ server:
 spring:
   data:
     mongodb:
-      host: localhost
+      host: ${DB_IP:localhost}
       port: 27017
-      database: mongo
+      database: test
       repositories:
         type: auto
         enabled: true

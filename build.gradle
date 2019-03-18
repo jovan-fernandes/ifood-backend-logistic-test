@@ -49,6 +49,9 @@ compileJava {
 
 compileTestJava.options.encoding = 'UTF-8'
 
+bootRun {
+    jvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8001"]
+}
 
 repositories {
     mavenCentral()
@@ -56,9 +59,10 @@ repositories {
     maven { url 'https://repo.spring.io/milestone' }
 }
 
+
 dependencies {
 
-    //    compile("org.mapstruct:mapstruct-jdk8:${mapStructVersion}")
+    // Mapstruct
     compile("org.mapstruct:mapstruct:${mapStructVersion}")
     annotationProcessor("org.mapstruct:mapstruct-processor:${mapStructVersion}")
     testCompileOnly("org.mapstruct:mapstruct-jdk8:${mapStructVersion}")
@@ -88,9 +92,6 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
     compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard')
 
-    // Mapstruct
-//    compile(group: 'org.mapstruct', name: 'mapstruct-jdk8', version: mapStructVersion)
-//    compile(group: 'org.mapstruct', name: 'mapstruct-processor', version: mapStructVersion)
 
 }
 
