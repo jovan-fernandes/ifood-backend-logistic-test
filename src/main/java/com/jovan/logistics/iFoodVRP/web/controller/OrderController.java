@@ -8,6 +8,7 @@ import com.jovan.logistics.iFoodVRP.utils.ApiVersion;
 import com.jovan.logistics.iFoodVRP.web.request.OrderRequest;
 import com.jovan.logistics.iFoodVRP.web.response.OrderResponse;
 import com.jovan.logistics.iFoodVRP.web.response.SearchedOrdersResponse;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -56,7 +57,8 @@ public class OrderController {
     public ResponseEntity<SearchedOrdersResponse> getAll(@RequestParam("pageNumber") @NotNull @Min(1) final Integer pageNumber,
                                                          @RequestParam("numberOfElements") @NotNull @Min(1) final Integer numberOfElements,
                                                          @RequestParam("restaurantName") final Optional<String> restaurantName,
-                                                         @RequestParam("deliveryTime") @DateTimeFormat(pattern = "dd-MM-yyyy") final Optional<Calendar> deliveryTime) {
+                                                         @RequestParam("deliveryTime") @ApiParam(example = "2019-03-17T13:54:00.000Z")
+                                                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final Optional<Date> deliveryTime) {
         SearchedOrdersResponse searchResult;
 
         if (restaurantName.isPresent()) {

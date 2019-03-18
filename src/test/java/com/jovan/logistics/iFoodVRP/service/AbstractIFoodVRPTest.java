@@ -23,7 +23,7 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -103,9 +103,9 @@ public class AbstractIFoodVRPTest {
         ReflectionTestUtils.setField(orderMapper, "restaurantMapper", restaurantMapper);
     }
 
-    protected Calendar getDefaultPickupDateTime() {
+    protected Date getDefaultPickupDateTime() {
         try {
-            return DateFormatter.formatCalendarStrDefaultPattern("2018-06-05 13:37:00")
+            return DateFormatter.formatDateToStrDefaultPattern("2018-06-05 13:37:00")
                     .orElseThrow(InvalidDateFormatException::new);
         } catch (InvalidDateFormatException e) {
             log.error("Invalid Format", e);
@@ -113,9 +113,9 @@ public class AbstractIFoodVRPTest {
         return null;
     }
 
-    protected Calendar getDefaultDeliveryDateTime() {
+    protected Date getDefaultDeliveryDateTime() {
         try {
-            return DateFormatter.formatCalendarStrDefaultPattern("2018-06-05 13:54:00")
+            return DateFormatter.formatDateToStrDefaultPattern("2018-06-05 13:54:00")
                     .orElseThrow(InvalidDateFormatException::new);
         } catch (InvalidDateFormatException e) {
             log.error("Invalid Format", e);

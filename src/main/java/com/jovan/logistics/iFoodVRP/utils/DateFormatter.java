@@ -23,7 +23,9 @@ public class DateFormatter {
 
     public static final String APPLICATION_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
-    private final static SimpleDateFormat defaultFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final String DEFAULT_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    private final static SimpleDateFormat defaultFormatter = new SimpleDateFormat(DEFAULT_DATE_TIME_FORMAT);
 
     private final static SimpleDateFormat isoFormatter = new SimpleDateFormat(APPLICATION_DATE_TIME_FORMAT);
 
@@ -32,28 +34,20 @@ public class DateFormatter {
         return formatDate(calendar.getTime(), DATE_PATTERN.isoFormat);
     }
 
-    public static Optional<String> formatDateDefaultPattern(Calendar calendar) {
+    public static Optional<String> formatDateDefaultPattern(Date date) {
+        return formatDate(date, DATE_PATTERN.defaultFromat);
+    }
+
+    public static Optional<String> formatCalendarDefaultPattern(Calendar calendar) {
         return formatDate(calendar.getTime(), DATE_PATTERN.defaultFromat);
     }
 
-    public static Optional<Calendar> formatCalendarStr(String str) {
-        Optional<Date> date = formatDateStr(str, DATE_PATTERN.isoFormat);
-        if (date.isPresent()) {
-            Calendar instance = Calendar.getInstance();
-            instance.setTime(date.get());
-            return Optional.of(instance);
-        }
-        return Optional.empty();
+    public static Optional<Date> formatDateStr(String str) {
+        return formatDateStr(str, DATE_PATTERN.isoFormat);
     }
 
-    public static Optional<Calendar> formatCalendarStrDefaultPattern(String str) {
-        Optional<Date> date = formatDateStr(str, DATE_PATTERN.defaultFromat);
-        if (date.isPresent()) {
-            Calendar instance = Calendar.getInstance();
-            instance.setTime(date.get());
-            return Optional.of(instance);
-        }
-        return Optional.empty();
+    public static Optional<Date> formatDateToStrDefaultPattern(String str) {
+        return formatDateStr(str, DATE_PATTERN.defaultFromat);
     }
 
 

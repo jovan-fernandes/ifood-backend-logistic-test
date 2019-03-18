@@ -5,8 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author Jovan Fernandes
@@ -25,10 +26,16 @@ public class OrderEntity {
 
     @Id
     private String id;
+
     private RestaurantEntity restaurant;
+
     private ClientEntity client;
-    private Calendar pickup;
-    private Calendar delivery;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date pickup;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Date delivery;
 
 
 }

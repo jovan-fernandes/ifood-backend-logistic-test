@@ -17,7 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -65,15 +65,21 @@ public class OrdersServiceImpl implements OrderService {
     }
 
     @Override
-    public SearchedOrdersResponse getAll(Integer pageNumber, Integer numberOfElements, Optional<Calendar> deliveryTime) {
-        //TODO: filtra por deliveryTime
+    public SearchedOrdersResponse getAll(Integer pageNumber, Integer numberOfElements, Optional<Date> deliveryTime) {
         PageRequest pageableForOrders = PageableUtils.createPageable(pageNumber, numberOfElements, "id");
-        Page<OrderEntity> orders = ordersReposiory.findAll(pageableForOrders);
+
+        Page<OrderEntity> orders;
+
+        if (deliveryTime.isPresent()) {
+            orders = ordersReposiory.findByDelivery(deliveryTime.get(), pageableForOrders);
+        } else {
+            orders = ordersReposiory.findAll(pageableForOrders);
+        }
         return this.mapper.toSearchedOrdersResponse(orders);
     }
 
     @Override
-    public SearchedOrdersResponse getByRestaurant(Integer pageNumber, Integer numberOfElements, String restaurantName, Optional<Calendar> deliveryTime) {
+    public SearchedOrdersResponse getByRestaurant(Integer pageNumber, Integer numberOfElements, String restaurantName, Optional<Date> deliveryTime) {
         PageRequest pageableForOrders = PageableUtils.createPageable(pageNumber, numberOfElements, "id");
 
         Page<OrderEntity> orders;

@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author Jovan Fernandes
@@ -43,12 +43,12 @@ public class OrderRequest implements Serializable {
     @NotNull
     @DateTimeFormat(pattern = DateFormatter.APPLICATION_DATE_TIME_FORMAT)
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @ApiModelProperty(required = true, example = "2018-06-05T13:37:00Z")
-    private Calendar pickup;
+    @ApiModelProperty(required = true, example = "2019-03-17T13:37:00Z")
+    private Date pickup;
 
     @NotNull
     @DateTimeFormat(pattern = DateFormatter.APPLICATION_DATE_TIME_FORMAT)
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @ApiModelProperty(required = true, example = "2018-06-05T13:54:00Z")
-    private Calendar delivery;
+    @ApiModelProperty(required = true, example = "2019-03-17T13:54:00Z")
+    private Date delivery;
 }

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +20,9 @@ public interface OrdersReposiory extends MongoRepository<OrderEntity, String> {
 
     Page<OrderEntity> findByRestaurant_name(final String name, final Pageable pageable);
 
-    Page<OrderEntity> findByRestaurant_nameAndDelivery(final String name, final Calendar delivery, final Pageable pageable);
+    Page<OrderEntity> findByRestaurant_nameAndDelivery(final String name, final Date delivery, final Pageable pageable);
+
+    Page<OrderEntity> findByDelivery(Date delivery, final Pageable pageable);
 
     List<OrderEntity> findByRestaurant_id(final String id);
 

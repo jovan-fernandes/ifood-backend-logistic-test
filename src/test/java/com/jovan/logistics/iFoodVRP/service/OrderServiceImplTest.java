@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -128,7 +128,7 @@ public class OrderServiceImplTest extends AbstractIFoodVRPTest {
 
         when(ordersReposiory.findById(ORDER_ID)).thenReturn(Optional.of(orderEntity));
 
-        Calendar newDeliveryTime = DateFormatter.formatCalendarStrDefaultPattern("2018-06-05 14:00:30")
+        Date newDeliveryTime = DateFormatter.formatDateToStrDefaultPattern("2018-06-05 14:00:30")
                 .orElseThrow(InvalidDateFormatException::new);
 
         orderEntity.setDelivery(newDeliveryTime);

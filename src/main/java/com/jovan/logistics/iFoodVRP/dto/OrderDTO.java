@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author Jovan Fernandes
@@ -31,7 +31,7 @@ public class OrderDTO implements Serializable {
 
     private ClientDTO client;
 
-    private Calendar pickup;
+    private Date pickup;
 
-    private Calendar delivery;
+    private Date delivery;
 }
